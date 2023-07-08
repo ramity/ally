@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+
+  ally_django:
+    container_name: ally_django
+    build:
+      dockerfile: ./docker/django/Dockerfile
+    image: ally_django
+    volumes:
+      - ./src:/root/src
+    ports:
+      - 80:8000
+    env_file:
+      - ./docker/django/.env
+    depends_on:
+      - ally_mariadb
+
+  ally_mariadb:
+    container_name: ally_mariadb
+    build:
+      dockerfile: ./docker/mariadb/Dockerfile
+    image: ally_mariadb
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    env_file:
+      - ./docker/mariadb/.env

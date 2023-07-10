@@ -110,8 +110,8 @@
 
 ## Stocks
 
-- stocks/symbol
-    - Set of all lookup symbols in which stock data is derived from
+- stocks/stock
+    - Set of all stocks. Name and symbol
 - stocks/service
     - Set of all services to query stock data from
 - stocks/export
@@ -123,10 +123,8 @@
 
 ---
 
-- stocks/buy
-    - An entry at which stock is bought in time
-- stocks/sell
-    - An entry at which stock is sold in time
+- stocks/position
+    - An entry at which a stock is bought or sold in time 
 
 ---
 

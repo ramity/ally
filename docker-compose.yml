@@ -27,3 +27,13 @@ services:
       - 3306:3306
     env_file:
       - ./docker/mariadb/.env
+
+  ally_phpmyadmin:
+    container_name: ally_phpmyadmin
+    build:
+      dockerfile: ./docker/phpmyadmin/Dockerfile
+    image: ally_phpmyadmin
+    ports:
+      - 8080:80
+    env_file:
+      - ./docker/phpmyadmin/.env

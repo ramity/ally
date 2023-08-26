@@ -7,5 +7,5 @@ RUN pip install django==4.2.2
 RUN pip install mysqlclient
 WORKDIR /root/src/
 
-ENTRYPOINT sleep infinity
-#ENTRYPOINT python manage.py runserver 0.0.0.0:8000
+# ENTRYPOINT sleep infinity
+ENTRYPOINT python manage.py runserver 0.0.0.0:8000

@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET')
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.0.4'
+]
 
 
 # Application definition
@@ -35,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django applications
+    'fitness.apps.FitnessConfig',
+    'food.apps.FoodConfig',
+    'stocks.apps.StocksConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +78,7 @@ WSGI_APPLICATION = 'ally.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql'
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('DATABASE'),
         'USER': os.environ.get('USER'),
         'PASSWORD': os.environ.get('PASSWORD'),

@@ -11,4 +11,4 @@ RUN pip install celery[librabbitmq,redis]
 
 WORKDIR /root/src
 
-ENTRYPOINT python manage.py runserver 0.0.0.0:8000
+ENTRYPOINT celery -A ally worker -l DEBUG

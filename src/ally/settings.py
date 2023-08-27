@@ -108,10 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
 USE_I18N = True
+LANGUAGE_CODE = 'en-us'
 USE_TZ = True
+TIME_ZONE = 'America/Chicago'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -121,3 +121,9 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery Configuration Options
+CELERY_TIMEZONE = 'America/Chicago'
+CELERY_BROKER_URL = 'amqp://' + os.environ.get('RABBITMQ_DEFAULT_USER') + ':' + os.environ.get('RABBITMQ_DEFAULT_PASS') + '@ally_rabbitmq:5672/'
+CELERY_RESULT_BACKEND = 'redis://ally_redis:6379/0'
+CELERY_TASK_TRACK_STARTED = True

@@ -13,8 +13,12 @@ services:
       - 80:8000
     env_file:
       - ./docker/django/.env
+      - ./docker/rabbitmq/.env
     depends_on:
       - ally_mariadb
+      - ally_redis
+      - ally_rabbitmq
+      - ally_celery
 
   ally_mariadb:
     container_name: ally_mariadb
@@ -22,7 +26,7 @@ services:
       dockerfile: ./docker/mariadb/Dockerfile
     image: ally_mariadb
     volumes:
-      - ./data:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     ports:
       - 3306:3306
     env_file:
@@ -37,3 +41,42 @@ services:
       - 8080:80
     env_file:
       - ./docker/phpmyadmin/.env
+    depends_on:
+      - ally_mariadb
+  
+
+  # Distributed Stock Scraping and Analysis (DSSA)
+
+  ally_celery:
+    container_name: ally_celery
+    build:
+      dockerfile: ./docker/celery/Dockerfile
+    image: ally_celery
+    volumes:
+      - ./src:/root/src
+    env_file:
+      - ./docker/django/.env
+      - ./docker/rabbitmq/.env
+    depends_on:
+      - ally_rabbitmq
+      - ally_redis
+
+  ally_rabbitmq:
+    container_name: ally_rabbitmq
+    build:
+      dockerfile: ./docker/rabbitmq/Dockerfile
+    image: ally_rabbitmq
+    ports:
+      - 5672:5672
+    env_file:
+      ./docker/rabbitmq/.env
+
+  ally_redis:
+    container_name: ally_redis
+    build:
+      dockerfile: ./docker/redis/Dockerfile
+    image: ally_redis
+    volumes:
+      - ./data/redis:/var/lib/redis
+    ports:
+      - 6379:6379

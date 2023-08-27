@@ -1,4 +1,6 @@
-data/*
+data/mysql/*
+data/redis/*
 .env
+redis.conf
 !.gitkeep
 __pycache__
